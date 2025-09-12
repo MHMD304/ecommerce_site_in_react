@@ -13,19 +13,22 @@ function App() {
   },[])
   return (
     <>
-      <div>
-        <h1>hello world</h1>
-        {
-          result.map((cat)=>{
-            return( 
-              <div key={cat.id}>
-            <li>{cat.id}</li>
-             <li>{cat.title}</li>  
-             </div> 
-            )
-          })
-        }
-        </div>
+      <header>My store</header>
+      <section>
+        <nav>
+          {
+            result.map((cat)=>(
+              <div key={cat.id}>{cat.title}  </div> 
+            ))
+          }
+        </nav>
+        <article>
+          main area
+       </article>
+      </section>
+      <footer>
+          footer
+      </footer>
     </>
   )
 }
