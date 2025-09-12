@@ -9,7 +9,6 @@ export const fetcher = async(url)=>{
         const jsonData = await response.json();
         responseObject.errorMessage = '';
         responseObject.data = jsonData;
-        console.log(responseObject.data);
     }catch(err){
         responseObject.errorMessage = err.message;
     }
@@ -21,4 +20,7 @@ export const getCategories = ()=>{
 
 export const getProductByCatId = id=>{
     return  fetcher("products?catId="+id);
+}
+export const getProductById = id=>{
+    return fetcher("products?id="+id);
 }
