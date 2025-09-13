@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import React from 'react'
 import { useContext,useState,useEffect } from 'react'
 import { CartContext } from '../contexts/CartContext'
 import { Link,useNavigate } from 'react-router-dom'
@@ -15,7 +16,7 @@ const Basket = () => {
 
   const renderCart = ()=>{
     return cartItems.map((item)=>(
-      <> 
+      <React.Fragment key={item.id}> 
       <div>
         <Link to={`/products/${item.id}`}><p>{item.title}</p></Link>
       </div>
@@ -30,7 +31,7 @@ const Basket = () => {
       <BasketPrice>
         <p>&pound;{item.price}</p>
       </BasketPrice>
-      </>
+      </React.Fragment>
       ))
   }
 

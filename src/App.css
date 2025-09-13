@@ -30,7 +30,7 @@ header {
     color: white;
     border-bottom: 1px solid #ddd;
     display: grid;
-    grid-template-columns: 0.1fr 1fr 0.1fr;
+    grid-template-columns: 0.1fr 0.1fr 1fr 0.1fr;
 }
 #headerHomeIcone{
    justify-self: start;
@@ -48,12 +48,11 @@ header a {
 #search {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
 }
-
 #search input {
     margin-left: 10px;
-    height: 40px;
+    height: 30px;
+    margin-top: 5px;
     padding: 0 15px;
     border: 1px solid #ddd;
     border-radius: 4px;

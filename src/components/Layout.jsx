@@ -1,5 +1,6 @@
 import { Outlet,Link } from 'react-router-dom'
 import { FaHome, FaShoppingCart } from "react-icons/fa";
+import Search from './Search';
 const Layout = ({categories}) => {
     const renderCategories = ()=>{
    return categories.data.map(cat=>(
@@ -10,8 +11,10 @@ const Layout = ({categories}) => {
         <>
       <header>
         <Link to="/"><div id="headerHomeIcon"><FaHome/></div></Link>
+        <Search/>
         <div id="headerTitle">My store</div>
         <Link to='/basket'><div id="headerCartIcon"><FaShoppingCart/></div></Link>
+        
       </header>
       <section>
         <nav>
