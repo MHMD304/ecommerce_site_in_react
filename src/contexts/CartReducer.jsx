@@ -22,7 +22,7 @@ export const CartReducer = (state,action)=>{
         case "DECQTY":
             if(index>-1)
             {
-                //state.cartItems[index].quantity--;
+                //state.cartItems[index].quantity--;BADDD WAAAY!!
                 if(newItems[index].quantity===1)
                    newItems = newItems.filter(x=>x.id!==action.payload.id);
                 else

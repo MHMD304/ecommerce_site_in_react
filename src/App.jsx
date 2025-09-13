@@ -8,6 +8,7 @@ import ProductDetails from './components/ProductDetails.jsx'
 import Basket from './components/Basket.jsx'
 import Checkout from './components/Checkout.jsx'
 import Home from './components/Home.jsx';
+import OrderConfirmation from './components/OrderConfirmation.jsx';
 
 function App() {
   const [categories,setCategories] = useState({errorMessage:'',data:[]});
@@ -32,6 +33,7 @@ function App() {
               <Route path='basket' element={<Basket/>}/>
               <Route path='checkout' element={<Checkout/>}/>
               <Route path='categories/:cid' element={<Category/>}/>
+              <Route path='confirmOrder' element={<OrderConfirmation/>}/>
             </Route>
         </Routes>
     </BrowserRouter>
