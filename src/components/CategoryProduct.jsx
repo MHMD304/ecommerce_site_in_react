@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link,useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { CartContext } from '../contexts/CartContext';
 
 const CategoryProduct = ({title,image,specs,features,price,stock,id}) => {
+    const cartContext = React.useContext(CartContext);
+    const {addProduct} = cartContext; 
     const navigate = useNavigate();
     const color = stock === 0 
     ? "red" 
@@ -57,7 +59,7 @@ const CategoryProduct = ({title,image,specs,features,price,stock,id}) => {
             </Stock>
             <Actions >
                  <button onClick={()=>navigate(`products/${id}`)}>View Product</button>
-                 <button>Add to Basket</button>
+                 <button onClick={()=>addProduct({id,title,price})}>Add to Basket</button>
             </Actions>
         </aside>
     </article>
