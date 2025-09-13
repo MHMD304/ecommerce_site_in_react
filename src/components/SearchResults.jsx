@@ -16,17 +16,21 @@ const SearchResults = () => {
   },[query]);
 
   const renderProducts = ()=>{
-    return products.data.map(p=>(
-      <CategoryProduct key={p.id} {...p} />
-    ));
+    if(products.data.length>0){
+        return products.data.map(p=>(
+        <CategoryProduct key={p.id} {...p} />
+        ));
+    }else{
+        return <div className='error-message'>No result found</div>
+    }
     }
   return (
     <div >
           {
-            products.errorMessage!==''&&<div>{products.errorMessage}</div>
+            products.errorMessage!==''&&<div className='error-message'>{products.errorMessage}</div>
           }
           {
-            products.data&&renderProducts()
+            renderProducts()
           }  
     </div>
   )
