@@ -2,8 +2,8 @@ import React,{createContext} from "react";
 import { CartReducer } from "./CartReducer";
 // eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext(undefined);
-
-const initialState = {cartItems:[]};
+const storage = localStorage.getItem('cart')?JSON.parse(sessionStorage.getItem('cart')):[];
+const initialState = {cartItems:storage};
 const CartContextProvider = ({children})=>{
     const [state,dispatch] = React.useReducer(CartReducer,initialState);
     const addProduct = payload=>{
