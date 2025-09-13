@@ -3,7 +3,7 @@ import { Outlet,Link } from 'react-router-dom'
 const Layout = ({categories}) => {
     const renderCategories = ()=>{
    return categories.data.map(cat=>(
-      <li key={cat.id}><Link  to={`categories/${cat.id}`}>{cat.title}</Link></li>
+      <li key={cat.id}><Link  to={`/categories/${cat.id}`}>{cat.title}</Link></li>
     ));
   }
   return (
@@ -26,7 +26,8 @@ const Layout = ({categories}) => {
       </section>
       
       <footer>
-          footer
+          <Link to={`/basket`} >Basket</Link>
+          <Link to={`/`} >Home</Link>
       </footer>
     </>
   )

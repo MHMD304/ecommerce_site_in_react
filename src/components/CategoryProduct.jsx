@@ -14,7 +14,7 @@ const CategoryProduct = ({title,image,specs,features,price,stock,id}) => {
     <article>
         <aside>
         <ProductTitle >
-            <Link to={`products/${id}`}>
+            <Link to={`/products/${id}`}>
                 {title}
             </Link>
         </ProductTitle>
