@@ -2,8 +2,12 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductById } from '../fetcher';
 import styled from 'styled-components';
+import { CartContext } from '../contexts/CartContext';
 
 const ProductDetails = () => {
+  const cartContext = React.useContext(CartContext);
+  const {addProduct} = cartContext; 
+
   const {pid} = useParams();
   const [product,setProduct] = React.useState({errorMessage:'',data:{}});
 
@@ -18,7 +22,7 @@ const ProductDetails = () => {
   const pData = product.data[0];
   if (!pData) return <div>Loading...</div>;
 
-  const {title,image,specs,features,price,stock,description} = pData;
+  const {id,title,image,specs,features,price,stock,description} = pData;
 
   const markUp = ()=>{
     return {__html:description}
@@ -68,7 +72,7 @@ const ProductDetails = () => {
                     <label>Free Delivery</label>
                </Stock>
                <Actions >
-                    <button>Add to Basket</button>
+                    <button onClick={()=>addProduct({id,title,price})}>Add to Basket</button>
                </Actions>
            </aside>
            {
