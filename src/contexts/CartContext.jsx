@@ -11,15 +11,22 @@ const CartContextProvider = ({children})=>{
     }
     const removeProduct = payload=>{
         dispatch({type:"REMOVE",payload});
+        return state.cartItems;
     }
     const incQty = payload=>{
         dispatch({type:"INCQTY",payload});
+        return state.cartItems;
     }
     const decQty = payload=>{
         dispatch({type:"DECQTY",payload});
+        return state.cartItems;
     }
     const clearBasket = ()=>{
         dispatch({type:"CLEAR",payload:undefined});
+        return state.cartItems;
+    }
+    const getItems = ()=>{
+        return state.cartItems;
     }
     const contextValues = {
         addProduct,
@@ -27,6 +34,7 @@ const CartContextProvider = ({children})=>{
         incQty,
         decQty,
         clearBasket,
+        getItems,
         ...state
     }
     return (

@@ -1,10 +1,49 @@
-import React from 'react'
 import styled from 'styled-components'
+import { useContext,useState,useEffect } from 'react'
+import { CartContext } from '../contexts/CartContext'
+import { Link,useNavigate } from 'react-router-dom'
+import {  FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 const Basket = () => {
+  const {getItems,clearBasket, removeProduct,incQty,decQty,} = useContext(CartContext);
+  const [cartItems,setCartItems] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    setCartItems(getItems());
+  },[getItems]);
+  
+
+  const renderCart = ()=>{
+    return cartItems.map((item)=>(
+      <> 
+      <div>
+        <Link to={`/products/${item.id}`}><p>{item.title}</p></Link>
+      </div>
+      <BasketQty>
+            <p>{item.quantity}</p>
+            <IconsContainer>
+              <FaPlus onClick={()=>setCartItems(incQty({id:item.id}))}/>
+              <FaMinus onClick={()=>setCartItems(decQty({id:item.id}))}/>
+              <FaTrash onClick={()=>setCartItems(removeProduct({id:item.id}))}/>
+            </IconsContainer>
+      </BasketQty>
+      <BasketPrice>
+        <p>&pound;{item.price}</p>
+      </BasketPrice>
+      </>
+      ))
+  }
+
+  const renderTotal = ()=>{
+    const items = getItems();
+    const total = items.reduce((total,item)=>(total + item.price * item.quantity),0);
+    return total;
+  }
+
   return (
     <BasketContainer>
       <BasketTitle>Shopping Cart</BasketTitle>
-      <BasketButton>CheckOut</BasketButton>
+      <BasketButton onClick={()=>navigate("/checkout")}>CheckOut</BasketButton>
       <BasketTable>
         <BasketHeader>
           <h4>Item</h4>
@@ -12,14 +51,15 @@ const Basket = () => {
           <h4>Price</h4>
         </BasketHeader>
         <BasketHeaderLine/>
-        <BasketHeader>Cart Items</BasketHeader>
+        <BasketHeader>{renderCart()}</BasketHeader>
         <BasketHeaderLine/>
-        <BasketButton>Clear</BasketButton>
-        <BasketTotal>Total:0$</BasketTotal>
+        <BasketButton onClick={()=>setCartItems(clearBasket())}>Clear</BasketButton>
+        <BasketTotal>Total:{renderTotal()}&pound;</BasketTotal>
       </BasketTable>
     </BasketContainer>
   )
 }
+
 export default Basket
 const BasketContainer = styled.div`
     display: grid;
@@ -75,4 +115,12 @@ const BasketButton = styled.button`
   &:hover{
     cursor:pointer;
   }
+`;
+const IconsContainer = styled.div`
+  display:flex;
+  gap:10px;
+  margin-left:5px;
+  alig-item:center;
+  justify-content:center;
+  font-size:20px;
 `;

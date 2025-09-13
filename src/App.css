@@ -29,8 +29,18 @@ header {
     font-size: 28px;
     color: white;
     border-bottom: 1px solid #ddd;
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 0.1fr;
 }
-
+#headerHomeIcone{
+   justify-self: start;
+}
+#headerTitle{
+    justify-self: center;
+}
+#headerCartIcon{
+    justify-self: end;
+}
 header a {
     color: white;
 }

@@ -58,7 +58,7 @@ const CategoryProduct = ({title,image,specs,features,price,stock,id}) => {
                  <label>Free Delivery</label>
             </Stock>
             <Actions >
-                 <button onClick={()=>navigate(`products/${id}`)}>View Product</button>
+                 <button onClick={()=>navigate(`/products/${id}`)}>View Product</button>
                  <button onClick={()=>addProduct({id,title,price})}>Add to Basket</button>
             </Actions>
         </aside>
