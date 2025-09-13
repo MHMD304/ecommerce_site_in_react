@@ -4,6 +4,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import ProductDetails from './components/ProductDetails.jsx'
 import Basket from './components/Basket.jsx'
 import Checkout from './components/Checkout.jsx'
+import Category from './components/Category.jsx'
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
@@ -12,6 +13,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='products/:pid' element={<ProductDetails/>}  />
             <Route path='basket' element={<Basket/>}/>
             <Route path='checkout' element={<Checkout/>}/>
+            <Route path='categories/:cid' element={<Category/>}/>
         </Routes>
         
     </BrowserRouter>
