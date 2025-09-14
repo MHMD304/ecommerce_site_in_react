@@ -27,10 +27,14 @@ const CategoryProduct = ({title,image,specs,features,price,stock,id}) => {
         </figure>
         </aside>
         <aside >
+            {
+            specs.dimensions&&(    
             <ProductInfo >
                 <SubTitle>Dimensions</SubTitle>
                 <label>{specs.dimensions}</label>
             </ProductInfo>
+            )
+            }
             {
              specs.capacity&&
              <ProductInfo >

@@ -133,6 +133,45 @@
       "specs": {"dimensions": "TV with stand: 682 x 1069 x 300 mm (H x W x D) - TV: 622 x 1069 x 300 mm (H x W x D) - Boxed: 220 x 1408 x 745 mm (H x W x D)"},
       "features": ["Crystal display for long-lasting colour & sharp contrast", "Crystal Processor 4K for the best 4K picture & targeted sound", "Picture quality : 2000 PQI", "HDR : HDR10+ / Hybrid Log-Gamma (HLG)", "Catch-up TV & 4K streaming", "TV PLUS", "HDMI 2.1 x 2 / HDMI 2.0 x 2"],
       "stock": 16
-    }
+    },
+    {
+      "id": 11,
+      "catId": 2,
+      "title": "Philips Daily Collection Electric Kettle 1.7L",
+      "productCode": "HD9316/00",
+      "image": "kettle1.jpg",
+      "price": 49,
+      "sku": "100011",
+      "description": "Boil water quickly and safely with the <b>Philips Daily Collection 1.7L Kettle</b> featuring auto shut-off and boil-dry protection.",
+      "specs": {"capacity": "1.7 litres", "power": "2200W"},
+      "features": ["Auto shut-off", "Boil-dry protection", "Cordless 360° base"],
+      "stock": 15
+    },
+    {
+      "id": 12,
+      "catId": 2,
+      "title": "Russell Hobbs Retro Kettle 1.5L",
+      "productCode": "RH1500R",
+      "image": "kettle2.jpg",
+      "price": 59,
+      "sku": "100012",
+      "description": "Add a touch of style to your kitchen with the <b>Russell Hobbs Retro Kettle</b>, featuring a 1.5L capacity and rapid boil technology.",
+      "specs": {"capacity": "1.5 litres", "power": "2400W"},
+      "features": ["Rapid boil", "360° swivel base", "Retro design"],
+      "stock": 10
+    },
+    {
+      "id": 13,
+      "catId": 2,
+      "title": "Breville Crystal Clear Glass Kettle 1.7L",
+      "productCode": "BGL720",
+      "image": "kettle3.jpg",
+      "price": 69,
+      "sku": "100013",
+      "description": "The <b>Breville Glass Kettle</b> boils water safely and lets you watch the water as it heats, with hidden elements for easy cleaning.",
+      "specs": {"capacity": "1.7 litres", "power": "2200W"},
+      "features": ["Glass body", "Concealed element", "Auto shut-off"],
+      "stock": 8
+    }   
   ]
 }

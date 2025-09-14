@@ -38,8 +38,10 @@ const Layout = ({ categories }) => {
       </section>
 
       <footer>
-        <Link to={`/basket`}>Basket</Link>
-        <Link to={`/`}>Home</Link>
+        <div>
+          <Link to={`/basket`}>Basket</Link>
+          <Link to={`/`}>Home</Link>
+        </div>
       </footer>
     </>
   );
