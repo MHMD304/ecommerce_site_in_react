@@ -1,43 +1,48 @@
-import { Outlet,Link } from 'react-router-dom'
+import { Outlet, Link } from "react-router-dom";
 import { FaHome, FaShoppingCart } from "react-icons/fa";
-import Search from './Search';
-const Layout = ({categories}) => {
-    const renderCategories = ()=>{
-   return categories.data?.map(cat=>(
-      <li key={cat.id}><Link  to={`/categories/${cat.id}`}>{cat.title}</Link></li>
+import Search from "./Search";
+const Layout = ({ categories }) => {
+  const renderCategories = () => {
+    return categories.data?.map((cat) => (
+      <li key={cat.id}>
+        <Link to={`/categories/${cat.id}`}>{cat.title}</Link>
+      </li>
     ));
-  }
+  };
   return (
-        <>
+    <>
       <header>
-        <Link to="/"><div id="headerHomeIcon"><FaHome/></div></Link>
-        <Search/>
+        <Link to="/">
+          <div id="headerHomeIcon">
+            <FaHome />
+          </div>
+        </Link>
+        <Search />
         <div id="headerTitle">My store</div>
-        <Link to='/basket'><div id="headerCartIcon"><FaShoppingCart/></div></Link>
-        
+        <Link to="/basket">
+          <div id="headerCartIcon">
+            <FaShoppingCart />
+          </div>
+        </Link>
       </header>
       <section>
         <nav>
-          {
-            categories.errorMessage!==''&&<div className='error-message'>{categories.errorMessage}</div>
-          }
-          <ul>
-          {
-            categories.data&&renderCategories()
-          }
-          </ul>
+          {categories.errorMessage !== "" && (
+            <div className="error-message">{categories.errorMessage}</div>
+          )}
+          <ul>{categories.data && renderCategories()}</ul>
         </nav>
         <main>
-            <Outlet/>
+          <Outlet />
         </main>
       </section>
-      
+
       <footer>
-          <Link to={`/basket`} >Basket</Link>
-          <Link to={`/`} >Home</Link>
+        <Link to={`/basket`}>Basket</Link>
+        <Link to={`/`}>Home</Link>
       </footer>
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
