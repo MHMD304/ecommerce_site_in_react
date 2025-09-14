@@ -1,7 +1,18 @@
 import { Outlet, Link } from "react-router-dom";
 import { FaHome, FaShoppingCart } from "react-icons/fa";
 import Search from "./Search";
+import React from "react";
+import { CartContext } from "../contexts/CartContext";
 const Layout = ({ categories }) => {
+  const [cartItemsCount,setCartItemsCount] = React.useState();
+  const {getItems} = React.useContext(CartContext);
+  
+  React.useEffect(()=>{
+    const items = getItems(); 
+    const totalCount = items.reduce((acc, item) => acc + (item.quantity || 1), 0);
+    setCartItemsCount(totalCount);
+  },[getItems]);
+
   const renderCategories = () => {
     return categories.data?.map((cat) => (
       <li key={cat.id}>
@@ -22,6 +33,7 @@ const Layout = ({ categories }) => {
         <Link to="/basket">
           <div id="headerCartIcon">
             <FaShoppingCart />
+            <span>{cartItemsCount}</span>
           </div>
         </Link>
       </header>
