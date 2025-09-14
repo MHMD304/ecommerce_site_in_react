@@ -3,7 +3,7 @@ import { FaHome, FaShoppingCart } from "react-icons/fa";
 import Search from './Search';
 const Layout = ({categories}) => {
     const renderCategories = ()=>{
-   return categories.data.map(cat=>(
+   return categories.data?.map(cat=>(
       <li key={cat.id}><Link  to={`/categories/${cat.id}`}>{cat.title}</Link></li>
     ));
   }
@@ -19,7 +19,7 @@ const Layout = ({categories}) => {
       <section>
         <nav>
           {
-            categories.errorMessage!==''&&<div>{categories.errorMessage}</div>
+            categories.errorMessage!==''&&<div className='error-message'>{categories.errorMessage}</div>
           }
           <ul>
           {

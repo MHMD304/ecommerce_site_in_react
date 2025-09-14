@@ -3,53 +3,126 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 const Checkout = () => {
   const navigate = useNavigate();
+  const [form,setForm] = React.useState({
+    name:'',
+    email:'',
+    shippingAddress1:'',
+    touched:{
+      name:false,
+      email:false,
+      shippingAddress1:false
+    }
+  });
+  const [disabled,setDisabled] = React.useState(true);
+  React.useEffect(() => {
+    setDisabled(formInvalid());
+  }, [form]);
+
+  const handleChange = (e)=>{
+    const {name,value} = e.target;
+    setForm((prev)=>{
+      return {
+        ...prev,
+        [name]:value
+      }
+    })
+  }
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    if(disabled){
+      return;
+    }
+    navigate('/confirmOrder')
+  }
+  const errors={
+      name:form.name.length===0,
+      email:form.email.length===0,
+      shippingAddress1:form.shippingAddress1.length===0
+    }
+  const formInvalid = ()=>{
+    const disabled=Object.keys(errors).some(x=>errors[x]);
+    return disabled;
+  }
+  const handleBlur = (e)=>{
+    const {name} = e.target;
+    setForm((prev)=>{
+      return {
+        ...prev,
+        touched:{...form.touched,[name]:true},
+      }
+    })
+  }
+  const showError = (feild)=>{
+    const hasError = errors[feild];
+    const shouldShow = form.touched[feild];
+    return hasError?shouldShow:false;
+  }
   return (
-    <CheckoutContainer>
-      <CheckoutTitle>Shopping Checkout</CheckoutTitle>
-      <CheckoutHeader><h4>Your Details</h4></CheckoutHeader>
-      <CheckoutHeaderLine/>
-      <CheckoutTable>
-        <CheckoutFormLabel>Name:</CheckoutFormLabel>
-        <input type='text'/>
-        <CheckoutFormLabel>Email:</CheckoutFormLabel>
-        <input type='email'/>
-      </CheckoutTable>
-      <CheckoutHeader><h4>Address Details</h4></CheckoutHeader>
-      <CheckoutHeaderLine/>
-       <CheckoutTable>
-          <CheckoutFormLabel>Copy to shipping</CheckoutFormLabel>
-                    <CheckoutFormCheckbox type="checkbox" />
+    <form onSubmit={handleSubmit}>
+      <CheckoutContainer>
+        <CheckoutTitle>Shopping Checkout</CheckoutTitle>
+        <CheckoutHeader><h4>Your Details</h4></CheckoutHeader>
+        <CheckoutHeaderLine/>
+        <CheckoutTable>
+          <CheckoutFormLabel>Name:</CheckoutFormLabel>
+          <CheckoutInput 
+            type='text'
+            onChange={handleChange}
+            name='name'
+            placeholder='Enter Name'
+            invalid={showError("name")}
+            onBlur={handleBlur}
+          />
+          <CheckoutFormLabel>Email:</CheckoutFormLabel>
+          <CheckoutInput 
+            type='email'
+            onChange={handleChange}
+            name='email'
+            placeholder='Enter Email'
+            invalid={showError("email")}
+            onBlur={handleBlur}
+            />
+        </CheckoutTable>
+        <CheckoutHeader><h4>Address Details</h4></CheckoutHeader>
+        <CheckoutHeaderLine/>
+        <CheckoutTable>
+            <CheckoutFormLabel>Copy to shipping</CheckoutFormLabel>
+                      <CheckoutFormCheckbox type="checkbox" />
 
-                    <CheckoutFormLabel>Billing Address</CheckoutFormLabel>
+                      <CheckoutFormLabel>Billing Address</CheckoutFormLabel>
 
-                    <CheckoutAddress>
-                        <input
-                            type="text"
-                            name="billingAddress1"
-                        />
-                        <input type="text" name="billingAddress2" />
-                        <input type="text" name="billingCity" />
-                    </CheckoutAddress>
+                      <CheckoutAddress>
+                          <CheckoutInput
+                              type="text"
+                              name="billingAddress1"
+                          />
+                          <CheckoutInput type="text" name="billingAddress2" />
+                          <CheckoutInput type="text" name="billingCity" />
+                      </CheckoutAddress>
 
-                    <CheckoutFormLabel>Shipping Address</CheckoutFormLabel>
+                      <CheckoutFormLabel>Shipping Address</CheckoutFormLabel>
 
-                    <CheckoutAddress>
-                        <CheckoutInput
-                            type="text"
-                            name="shippingAddress1"
-                            placeholder="Enter first address line"
-                        />
-                        <input type="text" name="shippingAddress2" />
-                        <input type="text" name="shippingCity" />
-                    </CheckoutAddress>
-                </CheckoutTable>
-      <CancelButton onClick={()=>navigate("/basket")}>
-        Cancel
-      </CancelButton>
-      <CheckoutButton onClick={()=>navigate('/confirmOrder')}>
-        Confirm Order
-      </CheckoutButton>
-    </CheckoutContainer>
+                      <CheckoutAddress>
+                          <CheckoutInput
+                              type="text"
+                              name="shippingAddress1"
+                              placeholder="Enter first address line"
+                              onChange={handleChange}
+                              invalid={showError("shippingAddress1")}
+                              onBlur={handleBlur}
+                          />
+                          <CheckoutInput type="text" name="shippingAddress2" />
+                          <CheckoutInput type="text" name="shippingCity" />
+                      </CheckoutAddress>
+                  </CheckoutTable>
+        <CancelButton onClick={()=>navigate("/basket")}>
+          Cancel
+        </CancelButton>
+        <CheckoutButton disabled={disabled} >
+          Confirm Order
+        </CheckoutButton>
+      </CheckoutContainer>
+    </form>
   )
 }
 
@@ -104,7 +177,7 @@ const CheckoutInput = styled.input`
     ${(props) =>
         props.invalid &&
         `
-        border-color: red;
+        border-color: #d93025;
         border-width: 3px;
     `}
 `;

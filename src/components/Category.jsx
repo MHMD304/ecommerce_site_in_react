@@ -22,7 +22,7 @@ const Category = () => {
   return (
     <div >
           {
-            products.errorMessage!==''&&<div>{products.errorMessage}</div>
+            products.errorMessage!==''&&<div className='error-message'>{products.errorMessage}</div>
           }
           {
             products.data&&renderProducts()

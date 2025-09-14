@@ -20,7 +20,7 @@ const ProductDetails = () => {
     fetchData();
   },[pid])
   const pData = product.data[0];
-  if (!pData) return <div>Loading...</div>;
+  if (!pData) return <div className='error-message'>{product.errorMessage}</div>;
 
   const {id,title,image,specs,features,price,stock,description} = pData;
 
