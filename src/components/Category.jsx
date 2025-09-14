@@ -12,7 +12,6 @@ const Category = () => {
     const fetchData = async () => {
       const p = await getProductByCatId(cid);
       setProducts(p);
-      console.log(p);
     };
     fetchData();
   }, [cid]);

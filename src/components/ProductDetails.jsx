@@ -14,7 +14,6 @@ const ProductDetails = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       const p = await getProductById(pid);
-      console.log(p);
       setProduct(p);
     };
     fetchData();

@@ -14,9 +14,20 @@ const Checkout = () => {
     },
   });
   const [disabled, setDisabled] = React.useState(true);
+   const errors = React.useMemo(() => ({
+    name: form.name.length === 0,
+    email: form.email.length === 0,
+    shippingAddress1: form.shippingAddress1.length === 0,
+  }), [form.name, form.email, form.shippingAddress1]);
+  
+  const formInvalid = React.useCallback(() => {
+    const disabled = Object.keys(errors).some((x) => errors[x]);
+    return disabled;
+  },[errors]);
+
   React.useEffect(() => {
     setDisabled(formInvalid());
-  }, [form]);
+  }, [form,formInvalid]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,21 +45,15 @@ const Checkout = () => {
     }
     navigate("/confirmOrder");
   };
-  const errors = {
-    name: form.name.length === 0,
-    email: form.email.length === 0,
-    shippingAddress1: form.shippingAddress1.length === 0,
-  };
-  const formInvalid = () => {
-    const disabled = Object.keys(errors).some((x) => errors[x]);
-    return disabled;
-  };
+ 
+
+  
   const handleBlur = (e) => {
     const { name } = e.target;
     setForm((prev) => {
       return {
         ...prev,
-        touched: { ...form.touched, [name]: true },
+        touched: { ...prev.touched, [name]: true },
       };
     });
   };
@@ -69,7 +74,7 @@ const Checkout = () => {
             onChange={handleChange}
             name="name"
             placeholder="Enter Name"
-            invalid={showError("name")}
+            $invalid={showError("name")}
             onBlur={handleBlur}
           />
           <CheckoutFormLabel>Email:</CheckoutFormLabel>
@@ -78,7 +83,7 @@ const Checkout = () => {
             onChange={handleChange}
             name="email"
             placeholder="Enter Email"
-            invalid={showError("email")}
+            $invalid={showError("email")}
             onBlur={handleBlur}
           />
         </CheckoutTable>
@@ -106,7 +111,7 @@ const Checkout = () => {
               name="shippingAddress1"
               placeholder="Enter first address line"
               onChange={handleChange}
-              invalid={showError("shippingAddress1")}
+              $invalid={showError("shippingAddress1")}
               onBlur={handleBlur}
             />
             <CheckoutInput type="text" name="shippingAddress2" />
